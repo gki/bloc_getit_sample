@@ -48,7 +48,6 @@ class _BlocFavoritePageState extends State<BlocFavoritePage> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     _subscription.cancel();
     super.dispose();
   }
