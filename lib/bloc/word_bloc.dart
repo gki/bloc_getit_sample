@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:bloc_getit_sample/models/word.dart';
-import 'package:bloc_getit_sample/models/word_item.dart';
+import 'package:bloc_getit_sample/models/items.dart';
 import 'package:rxdart/subjects.dart';
 
 class WordAddition {

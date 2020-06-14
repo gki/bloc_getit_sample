@@ -1,6 +1,6 @@
 import 'dart:collection';
 
-import 'package:bloc_getit_sample/models/word_item.dart';
+import 'package:bloc_getit_sample/models/items.dart';
 
 class Word {
   final List<WordItem> _items = <WordItem>[];

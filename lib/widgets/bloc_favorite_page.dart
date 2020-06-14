@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:bloc_getit_sample/bloc/word_bloc.dart';
-import 'package:bloc_getit_sample/models/word_item.dart';
+import 'package:bloc_getit_sample/models/items.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 
