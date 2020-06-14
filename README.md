@@ -1,16 +1,7 @@
 # bloc_getit_sample
+こちらのQiitaの写経
 
-A new Flutter project.
+https://qiita.com/sensuikan1973/items/64f1a6235bd8ecaf9067
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+オリジナルはこちら
+https://github.com/sensuikan1973/Flutter_RxDart_GetStarted
