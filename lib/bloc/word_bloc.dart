@@ -60,6 +60,39 @@ class WordBloc {
 
   Stream<List<WordItem>> get items => _items.stream;
 
+  // NOTE: 本当はgetterにしたいけど<T extends Item>みたいな書き方が出来ない。
+  // Stream<List<Item>> get itemsWithInfo<T extends Item> {
+  //   return _items.stream.transform(insertInfo());
+  // }
+
+  Stream<List<T>> itemsWithInfo<T extends Item>() {
+    return _items.stream.transform(insertInfo());
+  }
+
+  final _adInterval = 5;
+
+  StreamTransformer<List<WordItem>, List<T>> insertInfo<T extends Item>() {
+    return StreamTransformer<List<WordItem>, List<T>>.fromHandlers(
+        handleData: (value, sink) {
+      // 最初にSuggestionを入れる
+      final itemsWithInfo = <Item>[SuggestionItem("You might like FooBar!")];
+      // 途中に広告を入れる
+      if (value.length <= _adInterval) {
+        itemsWithInfo
+          ..addAll(value)
+          ..add(AdItem());
+      } else {
+        for (int i = 0; i < value.length; i++) {
+          if (i > 0 && i % _adInterval == 0) {
+            itemsWithInfo.add(AdItem());
+          }
+          itemsWithInfo.add(value[i]);
+        }
+      }
+      sink.add(itemsWithInfo);
+    });
+  }
+
   void dispose() {
     _items.close();
     _itemCount.close();
