@@ -18,31 +18,30 @@ class WordList extends StatelessWidget {
             const addNum = 10;
             suggestion.addMulti(generateWordPairs().take(addNum).toList());
           }
-          return _buildRow(
-              GetIt.I<WordBloc>(), suggestion.suggestedWords[index]);
+          return _buildRow(suggestion.suggestedWords[index]);
         });
   }
 }
 
 // Favorite済み、すなわちword.itemsに含まれていれば、赤いハートアイコンにする
-Widget _buildRow(WordBloc word, WordPair pair) {
+Widget _buildRow(WordPair pair) {
   return new StreamBuilder<List<WordItem>>(
-      stream: word.items,
+      stream: GetIt.I<WordBloc>().items,
       builder: (_, snapshot) {
         if (snapshot.data == null || snapshot.data.isEmpty) {
-          return _createWordListTile(word, false, pair.asPascalCase);
+          return _createWordListTile(false, pair.asPascalCase);
         } else {
           final alreadyAdded = snapshot.data.fold(
               false,
               (prevResult, item) =>
                   prevResult || item.name == pair.asPascalCase);
-          return _createWordListTile(word, alreadyAdded, pair.asPascalCase);
+          return _createWordListTile(alreadyAdded, pair.asPascalCase);
         }
       });
 }
 
-ListTile _createWordListTile(WordBloc word, bool isFavorited, String title) {
-  print('_createWordListTile $word $isFavorited $title');
+ListTile _createWordListTile(bool isFavorited, String title) {
+  print('_createWordListTile $isFavorited $title');
   return new ListTile(
     key: Key(title),
     title: new Text(title),
@@ -52,9 +51,9 @@ ListTile _createWordListTile(WordBloc word, bool isFavorited, String title) {
     ),
     onTap: () {
       if (isFavorited) {
-        word.wordRemoval.add(WordRemoval(title));
+        GetIt.I<WordBloc>().wordRemoval.add(WordRemoval(title));
       } else {
-        word.wordAddition.add(WordAddition(title));
+        GetIt.I<WordBloc>().wordAddition.add(WordAddition(title));
       }
     },
   );

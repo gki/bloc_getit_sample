@@ -1,15 +1,8 @@
+import 'package:bloc_getit_sample/bloc/word_bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:meta/meta.dart';
+import 'package:get_it/get_it.dart';
 
 class CountLabel extends StatefulWidget {
-  final int favoriteCount; //表示したいカウント
-
-  CountLabel({
-    Key key,
-    @required this.favoriteCount,
-  })  : assert(favoriteCount >= 0),
-        super(key: key);
-
   @override
   CountLabelState createState() {
     return CountLabelState();
@@ -17,10 +10,21 @@ class CountLabel extends StatefulWidget {
 }
 
 class CountLabelState extends State<CountLabel> {
+  int favoriteCount;
+  @override
+  void initState() {
+    super.initState();
+    GetIt.I<WordBloc>().itemCount.listen((count) {
+      setState(() {
+        favoriteCount = count;
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Text(
-      widget.favoriteCount.toString(),
+      favoriteCount.toString(),
       style: new TextStyle(
           fontWeight: FontWeight.bold,
           fontSize: 35.0, //目立つようにでかくしてある
