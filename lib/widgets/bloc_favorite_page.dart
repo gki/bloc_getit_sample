@@ -32,7 +32,7 @@ class _BlocFavoritePageState extends State<BlocFavoritePage> {
       _subscription.cancel();
     }
     if (withInfo) {
-      _subscription = wordBloc.itemsWithInfo().listen((items) {
+      _subscription = wordBloc.itemsWithInfo.listen((items) {
         setState(() {
           wordItemList = items;
         });
@@ -80,29 +80,26 @@ class _BlocFavoritePageState extends State<BlocFavoritePage> {
     }
 
     final tiles = wordItemList.map((item) {
-      switch (item.type) {
-        case ItemType.word:
-          final word = item as WordItem;
-          return new ListTile(
-            title: new Text(word.name),
-            trailing: IconButton(
-              icon: Icon(Icons.delete),
-              onPressed: () => wordBloc.wordRemoval.add(WordRemoval(word.name)),
-            ),
-          );
-        case ItemType.suggestion:
-          return Container(
-            color: Colors.cyan,
-            child: ListTile(
-                title:
-                    new Text('Suggestion! ${(item as SuggestionItem).value}')),
-          );
-        case ItemType.ad:
-          return Container(
-            color: Colors.amber,
-            child: ListTile(title: Text((item as AdItem).adMessage)),
-          );
+      if (item is WordItem) {
+        return new ListTile(
+          title: new Text(item.name),
+          trailing: IconButton(
+            icon: Icon(Icons.delete),
+            onPressed: () => wordBloc.wordRemoval.add(WordRemoval(item.name)),
+          ),
+        );
+      } else if (item is SuggestionItem) {
+        return Container(
+          color: Colors.cyan,
+          child: ListTile(title: new Text('Suggestion! ${item.value}')),
+        );
+      } else if (item is AdItem) {
+        return Container(
+          color: Colors.amber,
+          child: ListTile(title: Text(item.adMessage)),
+        );
       }
+      throw AssertionError('Unexpected Item: $item');
     });
 
     final divided = ListTile.divideTiles(

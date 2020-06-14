@@ -4,9 +4,6 @@ class WordItem extends Item {
 
   @override
   String toString() => "$name";
-
-  @override
-  ItemType get type => ItemType.word;
 }
 
 class SuggestionItem extends Item {
@@ -15,24 +12,10 @@ class SuggestionItem extends Item {
 
   @override
   String toString() => "$value";
-
-  @override
-  ItemType get type => ItemType.suggestion;
 }
 
 class AdItem extends Item {
   final String adMessage = "This is AD!";
-
-  @override
-  ItemType get type => ItemType.ad;
 }
 
-abstract class Item {
-  ItemType get type;
-}
-
-enum ItemType {
-  word,
-  suggestion,
-  ad,
-}
+abstract class Item {}

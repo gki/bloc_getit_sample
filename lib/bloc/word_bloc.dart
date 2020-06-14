@@ -60,12 +60,7 @@ class WordBloc {
 
   Stream<List<WordItem>> get items => _items.stream;
 
-  // NOTE: 本当はgetterにしたいけど<T extends Item>みたいな書き方が出来ない。
-  // Stream<List<Item>> get itemsWithInfo<T extends Item> {
-  //   return _items.stream.transform(insertInfo());
-  // }
-
-  Stream<List<T>> itemsWithInfo<T extends Item>() {
+  Stream<List<dynamic>> get itemsWithInfo {
     return _items.stream.transform(insertInfo());
   }
 
