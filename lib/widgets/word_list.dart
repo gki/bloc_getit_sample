@@ -1,9 +1,9 @@
 import 'package:bloc_getit_sample/bloc/word_bloc.dart';
-import 'package:bloc_getit_sample/bloc/word_provider.dart';
 import 'package:bloc_getit_sample/models/suggestion.dart';
 import 'package:bloc_getit_sample/models/word_item.dart';
 import 'package:english_words/english_words.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 
 class WordList extends StatelessWidget {
   @override
@@ -19,7 +19,7 @@ class WordList extends StatelessWidget {
             suggestion.addMulti(generateWordPairs().take(addNum).toList());
           }
           return _buildRow(
-              WordProvider.of(context), suggestion.suggestedWords[index]);
+              GetIt.I<WordBloc>(), suggestion.suggestedWords[index]);
         });
   }
 }

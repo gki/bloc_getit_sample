@@ -1,6 +1,7 @@
-import 'package:bloc_getit_sample/bloc/word_provider.dart';
+import 'package:bloc_getit_sample/bloc/word_bloc.dart';
 import 'package:bloc_getit_sample/models/word_item.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 
 class BlocFavoritePage extends StatelessWidget {
   BlocFavoritePage();
@@ -9,7 +10,7 @@ class BlocFavoritePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final word = WordProvider.of(context);
+    final word = GetIt.I<WordBloc>();
     return Scaffold(
       appBar: AppBar(
         title: Text("Your Favorite"),
